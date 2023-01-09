@@ -1,0 +1,109 @@
+<div>
+  <button class="button button-bars" aria-haspopup="true" aria-controls="dropdown-menu4" (click)="openNav()">                           
+    <span class="icon is-small">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </span>
+  </button>
+</div>
+<div id="main" class="centered-content">
+    <div class="task-manager-container">
+            <div class="sidebar has-background-white">
+                <h1 class="title has-text-primary">
+                    DAFTAR KAPAL
+                </h1>
+
+                <div class="list-menu">
+                    <a href="" class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" (click)="removePush(list._id)" routerLinkActive="is-active">
+                        <p>{{list.title}}</p>
+                    </a>
+                </div>
+
+
+                <button class="button is-primary has-text-white" routerLink="/new-list">+ Tambah</button>
+                <button class="button is-danger has-text-white mt-2" (click)="logout()">Log Out</button>
+            </div>
+
+            <div class="task-list-container has-background-light">
+                <div class="container-task" *ngIf="tasks">
+                    <div class="top-bar has-background-light">
+                        <h1 class="title has-text-primary">
+                            DAFTAR KEGIATAN
+                        </h1>
+                        <div class="dropdown is-hoverable is-right">
+                            <div class="dropdown-trigger">
+                              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                               
+                                <span class="icon is-small">
+                                  <i class="fas fa-cog" aria-hidden="true"></i>
+                                </span>
+                              </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                                <div class="dropdown-content">
+                                  <a (click)="downloadReport()" class="dropdown-item">
+                                    Download PDF
+                                  </a>
+                                  <a [routerLink]="['/edit-list', selectedListId]" class="dropdown-item">
+                                    Ubah
+                                  </a>
+                                  <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
+                                    Hapus
+                                  </a>
+                                </div>
+                              </div>
+                          </div>
+                    </div>
+                    <!-- Task Elements -->
+                    <div class="task" *ngFor="let task of tasks">
+                        <div class="media-content">
+                          <p class=" title is-size-5">{{ task.title }}</p>
+                          <p class=" is-size-6">{{ task.tanggal | date:'dd MMMM YYYY' }}</p>
+                          <p class=" is-size-6">Pukul {{ task.waktuMulai }} - {{ task.waktuSelesai }} WITA</p>
+                        </div>
+                        <div class="task-buttons">
+              
+                          <button class="button" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
+                            <div class="icon">
+                              <i class="fas fa-edit"></i>
+                            </div>
+                          </button>
+              
+                          <button class="button is-danger" (click)="onDeleteTaskClick(task._id)" style="margin-left: 10px;">
+                            <div class="icon">
+                              <i class="fas fa-trash"></i>
+                            </div>
+                          </button>
+              
+                        </div>
+                      </div>
+
+                    <h3 class="empty-text-state" *ngIf="tasks.length === 0">Belum ada kegiatan yang dimasukkan! Silahkan tekan tombol tambah!</h3>
+                 
+                </div>
+
+                <button class="circle-add-button button is-primary"  routerLink="./new-task">
+                  <span class="icon">
+                      <i class='fa fa-plus'></i>
+                    </span>
+              </button>
+
+                <div *ngIf="!tasks">
+                    <h3 class="empty-text-state">Silahkan pilih daftar kapal untuk melihat kegiatan per-kapal</h3>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a class="title-sidemenu has-text-primary">DAFTAR KAPAL</a>
+  <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" (click)="removePush(list._id)" routerLinkActive="is-active">{{list.title}}</a>
+  <div class="sidemenu-footer">
+    <div>
+      <button class="button w is-primary has-text-white mb-2 is-fullwidth" routerLink="/new-list">+ Tambah</button>
+    </div>
+    <div>
+      <button class="button is-danger has-text-white is-fullwidth" (click)="logout()">Log Out</button>
+    </div>
+  </div>
+</div>

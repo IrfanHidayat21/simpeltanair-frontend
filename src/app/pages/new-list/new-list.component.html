@@ -1,0 +1,15 @@
+<div class="centered-content">
+    <div class="modal-box">
+        <h1 class="title">
+            Buat Time Sheet Kapal Baru
+        </h1>
+        <input #listTitleInput type="text" class="input has-background-light is-medium mb-2" placeholder="Nama Kapal / BG...">
+        <input #namaKapalInput type="text" class="input has-background-light is-medium mb-2" placeholder="Nama Kapal Bongkar...">
+        <input #jumlahMuatanInput type="number" class="input has-background-light is-medium mb-2" placeholder="Jumlah Muatan...">
+                <br> <br/>
+                <div class="buttons is-right">
+                    <button class="button is-medium" routerLink="/">Batal</button>
+                    <button class="button is-primary hast-text-white is-medium" (click)="createKapal(listTitleInput.value, namaKapalInput.value, jumlahMuatanInput.valueAsNumber)">Simpan</button>
+                </div>
+    </div>
+</div>

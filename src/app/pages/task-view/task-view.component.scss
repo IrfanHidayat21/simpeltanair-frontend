@@ -1,0 +1,252 @@
+@import '../../../main-styles.scss';
+
+
+
+.task-manager-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    max-height: 600px;
+    transition: background-color .5s;
+}
+
+.sidenav {
+    display: none;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+
+    width:  300px;
+    background: white;
+
+    padding: 42px;
+
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.task-list-container {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 42px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    .top-bar {
+        position: sticky;
+        top: 0px;
+        margin-bottom: 10px;
+        display: flex;
+        z-index: 99;
+        .title {
+            flex-grow: 1;
+        }
+    }
+
+
+
+}
+
+.container-task {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.list-menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    flex-grow: 1;
+    .list-menu-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        border-radius: 5px;
+
+        width: 100%;
+        color: #5f5f5f;
+        margin-bottom: 5px;
+        &:hover {
+            background: $light;
+        }
+
+        &.is-active {
+            background-color: #cff8ef;
+            color: $dark-green;
+        }
+        
+    }
+}
+
+.task {
+    display: flex;
+    background: white;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    align-items: center;
+
+    &:not(.complete) {
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &:hover {
+        box-shadow: 0 0 0 5px #eeeeee;
+        .task-buttons {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    }
+    &.completed .task-text {
+        text-decoration: line-through;
+        opacity: 0.8;
+    }
+
+
+    .task-text {
+        display: block;
+        flex-grow: 1;
+    }
+
+    .task-buttons {
+        transition: opacity 0.2s, transform 0.2s;
+        opacity: 0;
+        transform: scale(0.85);
+    }
+}
+
+.circle-add-button {
+    height: 50px;
+    width: 50px;
+    font-size: 25px;
+    position: absolute;
+    bottom: 25px;
+    right: 45px;
+    float: right !important;
+    border-radius: 50%;
+}
+
+.empty-text-state {
+    font-size: 20px;
+    color: #999;
+    text-align: center;
+}
+
+.button-bars {
+    display: none;
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #main {
+        transition: margin-left .5s;
+      }
+
+    .task-manager-container {
+        display: block;
+    }
+
+    .title-sidemenu {
+       font-weight: bold;
+        margin-top: 3px;
+    }
+
+    .sidebar {
+       display: none;
+    }
+    
+    .task-list-container {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        height: 100%;
+    }
+
+    .button-bars {
+        display: block;
+        position: relative;
+        top: 15px !important;
+        margin-left: 15px;
+    }
+
+    .sidenav {
+        display: block;
+        height: 101vh;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+
+      }
+      
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+
+    .sidemenu-footer {
+        position: absolute;
+        display: block;
+        width: 70%;
+        bottom: 25px;
+        left: 40px;
+
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
