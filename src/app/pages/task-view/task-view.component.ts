@@ -40,6 +40,10 @@ export class TaskViewComponent implements OnInit {
               this.tasksTable.push([formatDate(el.tanggal, 'dd MMMM YYYY', 'en_US'), el.title, el.waktuMulai + ' WITA', el.waktuSelesai + ' WITA']);
             });
           }) 
+
+        this.taskService.getKapalsById(params['listId']).subscribe((listsId: any) => {
+        this.listsById = listsId;
+        })
         } else {
           this.tasks = undefined;
         }
@@ -51,7 +55,6 @@ export class TaskViewComponent implements OnInit {
   }
 
   removePush(listId:string) {
-    this.tasksTable = [];
     this.taskService.getKapalsById(listId).subscribe((listsId: any) => {
       this.listsById = listsId;
     })
@@ -70,6 +73,10 @@ export class TaskViewComponent implements OnInit {
   onDeleteTaskClick(id: string) {
     this.taskService.deleteTask(this.selectedListId, id).subscribe((res: any) => {
       this.tasks = this.tasks.filter((val: { _id: string; }) => val._id !== id);
+      this.tasksTable = []
+      this.tasks.forEach((el:any, i:any, arr:any) => {
+        this.tasksTable.push([formatDate(el.tanggal, 'dd MMMM YYYY', 'en_US'), el.title, el.waktuMulai + ' WITA', el.waktuSelesai + ' WITA']);
+      });
       console.log(res);
     })
   }
