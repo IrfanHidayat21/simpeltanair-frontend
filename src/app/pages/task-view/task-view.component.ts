@@ -5,9 +5,7 @@ import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/task.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { WebRequestService } from 'src/app/web-request.service';
 import { formatDate } from '@angular/common';
-import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-task-view',
   templateUrl: './task-view.component.html',
@@ -20,7 +18,7 @@ export class TaskViewComponent implements OnInit {
   lists: any = [];
   tasks: any = [];
   tasksTable: any = [];
-  webVersion: string = environment.webVersion;
+  webVersion: string = '0.0.2';
   selectedListId!: string;
 
   users: any = [];
@@ -32,7 +30,6 @@ export class TaskViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.webVersion = environment.webVersion;
     this.route.params.subscribe(
       (params: Params) =>  {
         if (params['listId']) {
