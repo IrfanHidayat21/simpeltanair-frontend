@@ -18,9 +18,9 @@ export class SignupPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSignupButtonClicked(email: string, password: string) {
-    console.log(email,password);
-    this.authService.signup(email, password).subscribe((res: HttpResponse<any>) => {
+  onSignupButtonClicked(email: string, nahkoda:string, jumlahKru: number, kru:string, password: string) {
+    console.log(email, nahkoda, jumlahKru, kru, password);
+    this.authService.signup(email, nahkoda, jumlahKru, kru, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
         this.router.navigate(['/lists']);

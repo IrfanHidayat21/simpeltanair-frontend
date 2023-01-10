@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { WebRequestService } from 'src/app/web-request.service';
 import { formatDate } from '@angular/common';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-task-view',
   templateUrl: './task-view.component.html',
@@ -20,8 +20,10 @@ export class TaskViewComponent implements OnInit {
   lists: any = [];
   tasks: any = [];
   tasksTable: any = [];
-
+  webVersion: string = environment.webVersion;
   selectedListId!: string;
+
+  users: any = [];
   constructor(
     private taskService : TaskService,
     private route: ActivatedRoute ,
@@ -52,6 +54,8 @@ export class TaskViewComponent implements OnInit {
         this.lists = lists;
         
       })
+     this.users  = localStorage.getItem('user');
+     this.users = JSON.parse(this.users);
   }
 
   removePush(listId:string) {
@@ -113,7 +117,7 @@ export class TaskViewComponent implements OnInit {
       theme: 'plain',
       //for bg color
       styles: {
-        fillColor: '#3366ff'
+        fillColor: '#343a40'
       }
     });
 
@@ -123,7 +127,10 @@ export class TaskViewComponent implements OnInit {
           {
             content: 'NAMA KAPAL / BG :'
             +'\nNAMA KAPAL BONGKAR :'
-            +'\nJUMLAH MUATAN :',
+            +'\nJUMLAH MUATAN :'
+            +'\nABK NAMA NAHKODA :'
+            +'\nJUMLAH KRU :'
+            +'\nDAFTAR KRU :',
             styles: {
               halign:'left',
               fontStyle:'bold'
@@ -132,7 +139,10 @@ export class TaskViewComponent implements OnInit {
           {
             content: this.listsById.title
             +'\n'+this.listsById.namaKapal
-            +'\n'+this.listsById.jumlahMuatan +' TON',
+            +'\n'+this.listsById.jumlahMuatan +' TON'
+            +'\n'+this.users.nahkoda
+            +'\n'+this.users.jumlahKru +' Orang'
+            +'\n'+this.users.kru,
             styles: {
               halign:'right'
             }

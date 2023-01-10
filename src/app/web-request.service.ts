@@ -10,6 +10,7 @@ export class WebRequestService {
   constructor(
     private http: HttpClient
   ) {
+    // this.ROOT_URL = "http://localhost:3000";
     this.ROOT_URL = "https://simpeltanair-api.vercel.app";
    }
 
@@ -38,9 +39,12 @@ export class WebRequestService {
      })
   }
 
-   signup(email: string, password: string) {
+   signup(email: string, nahkoda:string, jumlahKru: number, kru:string, password: string) {
     return this.http.post(`${this.ROOT_URL}/users`,{
       email,
+      nahkoda,
+      jumlahKru,
+      kru,
       password
     }, { 
       observe: 'response'

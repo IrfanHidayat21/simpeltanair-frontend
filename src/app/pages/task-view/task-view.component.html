@@ -20,7 +20,11 @@
 
 
                 <button class="button is-primary has-text-white" routerLink="/new-list">+ Tambah</button>
+                <button class="button is-success has-text-white mt-2" routerLink="/new-list"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
                 <button class="button is-danger has-text-white mt-2" (click)="logout()">Log Out</button>
+                <div>
+                  <p class="has-text-primary has-text-centered mt-2">Web version {{webVersion}}</p>
+                </div>
             </div>
 
             <div class="task-list-container has-background-light">
@@ -104,6 +108,9 @@
     </div>
     <div>
       <button class="button is-danger has-text-white is-fullwidth" (click)="logout()">Log Out</button>
+    </div>
+    <div>
+      <p class="text-center">{{webVersion}}</p>
     </div>
   </div>
 </div>

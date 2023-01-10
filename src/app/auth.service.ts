@@ -19,19 +19,21 @@ export class AuthService {
     return this.webService.login(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
+        console.log(res.body,'res');
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token')!, res.headers.get('x-refresh-token')!);
+        this.setSession(res.body, res.body._id, res.headers.get('x-access-token')!, res.headers.get('x-refresh-token')!);
         console.log("LOGGED IN!");
       })
     )
   }
 
-  signup(email: string, password: string) {
-    return this.webService.signup(email, password).pipe(
+  signup(email: string,  nahkoda:string, jumlahKru: number, kru:string, password: string) {
+    return this.webService.signup(email, nahkoda, jumlahKru,kru, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
+        
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token')!, res.headers.get('x-refresh-token')!);
+        this.setSession(res.body, res.body._id, res.headers.get('x-access-token')!, res.headers.get('x-refresh-token')!);
         console.log("Successfully signed up and now logged in!");
       })
     )
@@ -60,13 +62,15 @@ export class AuthService {
     localStorage.setItem('x-access-token', accessToken)
   }
 
-  private setSession(userId: string, accessToken: string, refreshToken: string) {
+  private setSession(user:any, userId: string, accessToken: string, refreshToken: string) {
+    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('user-id', userId);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
 
   private removeSession() {
+    localStorage.removeItem('user');
     localStorage.removeItem('user-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
