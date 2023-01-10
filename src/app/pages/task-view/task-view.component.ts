@@ -32,6 +32,7 @@ export class TaskViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.webVersion = environment.webVersion;
     this.route.params.subscribe(
       (params: Params) =>  {
         if (params['listId']) {
