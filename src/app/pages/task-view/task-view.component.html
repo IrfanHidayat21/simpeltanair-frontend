@@ -107,10 +107,13 @@
       <button class="button w is-primary has-text-white mb-2 is-fullwidth" routerLink="/new-list">+ Tambah</button>
     </div>
     <div>
+      <button class="button is-success has-text-white mb-2 is-fullwidth" routerLink="/new-list"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
+    </div>
+    <div>
       <button class="button is-danger has-text-white is-fullwidth" (click)="logout()">Log Out</button>
     </div>
     <div>
-      <p class="text-center">{{webVersion}}</p>
+      <p class="has-text-primary has-text-centered mt-2">Web version {{webVersion}}</p>
     </div>
   </div>
 </div>
