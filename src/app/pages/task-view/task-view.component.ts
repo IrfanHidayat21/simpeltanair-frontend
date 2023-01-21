@@ -18,7 +18,7 @@ export class TaskViewComponent implements OnInit {
   lists: any = [];
   tasks: any = [];
   tasksTable: any = [];
-  webVersion: string = '0.0.2';
+  webVersion: string = '0.0.3';
   selectedListId!: string;
 
   users: any = [];
