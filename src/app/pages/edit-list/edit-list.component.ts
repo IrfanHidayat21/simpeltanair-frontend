@@ -16,20 +16,24 @@ export class EditListComponent implements OnInit {
   valNama!: string;
   valJumlahMuatan!: number;
 
+  loadData: any = 1;
   
   ngOnInit() {
+    this.loadData = 0;
     this.route.params.subscribe(
       (params: Params) => {
         this.listId = params['listId'];
         console.log(params['listId']);
+
+        this.taskService.getKapalsById(params['listId']).subscribe((lists: any=[]) => {
+          this.valTitle = lists.title;
+          this.valNama = lists.namaKapal;
+          this.valJumlahMuatan = lists.jumlahMuatan;
+          this.loadData = 1;
+        })
       }
     )
-    this.taskService.getKapals().subscribe((lists: any=[]) => {
-      this.valTitle = lists[0].title;
-      this.valNama = lists[0].namaKapal;
-      this.valJumlahMuatan = lists[0].jumlahMuatan;
-      
-    })
+
   }
 
   updateKapal(title:string, nama:string, jumlah:number) {

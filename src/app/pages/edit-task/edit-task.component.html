@@ -1,5 +1,5 @@
 <div class="centered-content">
-  <div class="modal-box">
+  <div class="modal-box" *ngIf="loadData === 1">
     <h1 class="title">
         Ubah Kegiatan
     </h1>
@@ -16,7 +16,12 @@
     <div class="buttons is-right">
       <button class="button is-medium" routerLink="/">Batal</button>
       <button class="button is-primary hast-text-white is-medium"
-        (click)="updateTask(taskTitleInput.value, taskTanggalInput.value, taskWaktuMulaiInput.value, taskWaktuSelesaiInput.value)">Simpan</button>
+      [disabled]="loadBtn === 0" (click)="updateTask(taskTitleInput.value, taskTanggalInput.value, taskWaktuMulaiInput.value, taskWaktuSelesaiInput.value)">
+        <div *ngIf="loadBtn === 1">Simpan</div> 
+        <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
+      </button>
     </div>
   </div>
+  <div class="lds-ripple2" *ngIf="loadData === 0"><div></div><div></div></div>
+
 </div>

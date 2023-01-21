@@ -19,8 +19,10 @@ export class EditTaskComponent implements OnInit {
   valWaktuMulai!: string;
   valWaktuSelesai!: string;
 
-  
+  loadData: any = 1;
+  loadBtn: any = 1;
   ngOnInit() {
+    this.loadData = 0;
     this.route.params.subscribe(
       (params: Params) => {
         this.taskId = params['taskId'];
@@ -31,7 +33,7 @@ export class EditTaskComponent implements OnInit {
           // this.valTanggal = this.valTanggal.formatDate("DD-MM-YYYY");
           this.valWaktuMulai = lists.waktuMulai;
           this.valWaktuSelesai = lists.waktuSelesai;
-          console.log(lists,'list');
+          this.loadData = 1;
         })
       }
     )
@@ -40,9 +42,10 @@ export class EditTaskComponent implements OnInit {
   }
 
   updateTask(title: string, tanggal: any, waktuMulai: string, waktuSelesai:string) {
-
+    this.loadBtn = 0;
     this.taskService.updateTask(this.listId, this.taskId, title, tanggal, waktuMulai, waktuSelesai).subscribe(() => {
       this.router.navigate(['/lists', this.listId]);
+      this.loadBtn = 1;
     })
   }
 

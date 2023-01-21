@@ -11,23 +11,23 @@
                 <h1 class="title has-text-primary">
                     DAFTAR KAPAL
                 </h1>
-
+                <div class="lds-facebook" *ngIf="load2 === 0"><div></div><div></div></div>
                 <div class="list-menu">
                     <a href="" class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" (click)="removePush(list._id)" routerLinkActive="is-active">
                         <p>{{list.title}}</p>
                     </a>
+                   
                 </div>
-
-
+                
                 <button class="button is-primary has-text-white" routerLink="/new-list">+ Tambah</button>
-                <button class="button is-success has-text-white mt-2" routerLink="/new-list"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
+                <button class="button is-success has-text-white mt-2" (click)="profile()"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
                 <button class="button is-danger has-text-white mt-2" (click)="logout()">Log Out</button>
                 <div>
                   <p class="has-text-primary has-text-centered mt-2">Web version {{webVersion}}</p>
                 </div>
             </div>
 
-            <div class="task-list-container has-background-light">
+            <div class="task-list-container has-background-light" *ngIf="showProfile === 0">
                 <div class="container-task" *ngIf="tasks">
                     <div class="top-bar has-background-light">
                         <h1 class="title has-text-primary">
@@ -66,23 +66,23 @@
                         </div>
                         <div class="task-buttons">
               
-                          <button class="button" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
+                          <button class="button btn-edit" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
                             <div class="icon">
                               <i class="fas fa-edit"></i>
                             </div>
                           </button>
               
-                          <button class="button is-danger" (click)="onDeleteTaskClick(task._id)" style="margin-left: 10px;">
-                            <div class="icon">
+                          <button class="button is-danger btn-delete" [disabled]="loadBtn === 0" (click)="onDeleteTaskClick(task._id)">
+                            <div class="icon" *ngIf="loadBtn === 1">
                               <i class="fas fa-trash"></i>
                             </div>
+                            <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
                           </button>
               
                         </div>
                       </div>
-
+                      <div class="lds-ripple" *ngIf="load === 0"><div></div><div></div></div>
                     <h3 class="empty-text-state" *ngIf="tasks.length === 0">Belum ada kegiatan yang dimasukkan! Silahkan tekan tombol tambah!</h3>
-                 
                 </div>
 
                 <button class="circle-add-button button is-primary"  routerLink="./new-task">
@@ -94,6 +94,37 @@
                 <div *ngIf="!tasks">
                     <h3 class="empty-text-state">Silahkan pilih daftar kapal untuk melihat kegiatan per-kapal</h3>
                 </div>
+            </div>
+
+            <!-- DATA PROFILE -->
+            <div class="task-list-container has-background-light" *ngIf="showProfile === 1">
+              <div class="container-task">
+                <div class="top-bar has-background-light mb-4">
+                    <h1 class="title has-text-primary">
+                        PROFILE USER
+                    </h1>
+                  
+                </div>
+                    <div>
+                      <label class="mb-1" for="">Nahkoda</label>
+                      <input readonly #nahkodaInput type="text" [value]="users.nahkoda" class="input has-background-light is-medium mb-3" placeholder="Nama nahkoda..">
+                    </div>
+                    <div>
+                      <label class="mb-1" for="">Jumlah Kru</label>
+                      <textarea readonly #jumlahKruInput type="number" [value]="users.jumlahKru" class="input has-background-light is-medium mb-3" placeholder="Jumlah Kru.."></textarea>
+                    </div>
+                    <div>
+                      <label class="mb-1" for="">Nama Anggota Kru</label>                 
+                      <input readonly #kruInput type="text" [value]="users.kru" class="input has-background-light is-medium mb-3" placeholder="Nama Anggota..">
+                    </div>
+                    <div>
+                      <label class="mb-1" for="">Email</label>
+                      <input readonly #emailInput type="email" [value]="users.email" class="input has-background-light is-medium mb-3" placeholder="Email..">
+                    </div>
+ 
+                  <div class="lds-ripple" *ngIf="loadProfile === 0"><div></div><div></div></div>
+            </div>
+
             </div>
     </div>
 </div>

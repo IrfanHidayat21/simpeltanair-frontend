@@ -1,5 +1,5 @@
 <div class="centered-content">
-    <div class="modal-box">
+    <div class="modal-box" *ngIf="loadData === 1">
         <h1 class="title">
             Ubah Time Sheet Kapal
         </h1>
@@ -12,4 +12,6 @@
                     <button class="button is-primary hast-text-white is-medium" (click)="updateKapal(listTitleInput.value, namaKapalInput.value, jumlahMuatanInput.valueAsNumber)">Simpan</button>
                 </div>
     </div>
+    <div class="lds-ripple2" *ngIf="loadData === 0"><div></div><div></div></div>
+
 </div>

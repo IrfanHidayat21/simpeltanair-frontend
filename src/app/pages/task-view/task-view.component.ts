@@ -22,6 +22,13 @@ export class TaskViewComponent implements OnInit {
   selectedListId!: string;
 
   users: any = [];
+  load: any = 1;
+  load2: any = 1;
+  loadBtn: any= 1;
+  loadProfile: any= 1;
+
+  showProfile: any=0;
+
   constructor(
     private taskService : TaskService,
     private route: ActivatedRoute ,
@@ -30,6 +37,7 @@ export class TaskViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.load2 = 0;
     this.route.params.subscribe(
       (params: Params) =>  {
         if (params['listId']) {
@@ -49,16 +57,23 @@ export class TaskViewComponent implements OnInit {
         }
       })
       this.taskService.getKapals().subscribe((lists: any=[]) => {
+
         this.lists = lists;
         
+        this.load2 = 1;
       })
      this.users  = localStorage.getItem('user');
      this.users = JSON.parse(this.users);
   }
 
   removePush(listId:string) {
+    this.load = 0;
+    this.showProfile = 0;
+    this.selectedListId = listId;
     this.taskService.getKapalsById(listId).subscribe((listsId: any) => {
       this.listsById = listsId;
+
+      this.load = 1;
     })
     document.getElementById("mySidenav")!.style.width = "0";
     document.getElementById("main")!.style.marginLeft= "0";
@@ -73,14 +88,24 @@ export class TaskViewComponent implements OnInit {
   }
 
   onDeleteTaskClick(id: string) {
+    this.loadBtn = 0;
     this.taskService.deleteTask(this.selectedListId, id).subscribe((res: any) => {
       this.tasks = this.tasks.filter((val: { _id: string; }) => val._id !== id);
       this.tasksTable = []
       this.tasks.forEach((el:any, i:any, arr:any) => {
         this.tasksTable.push([formatDate(el.tanggal, 'dd MMMM YYYY', 'en_US'), el.title, el.waktuMulai + ' WITA', el.waktuSelesai + ' WITA']);
+        this.loadBtn = 1;
       });
       console.log(res);
     })
+  }
+
+  profile() {
+    this.loadProfile = 0;
+    this.showProfile = 1;
+    setTimeout(() => {
+      this.loadProfile = 1;
+    }, 1000);
   }
 
   logout() {
