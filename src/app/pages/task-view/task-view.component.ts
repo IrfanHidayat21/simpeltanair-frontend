@@ -61,6 +61,10 @@ export class TaskViewComponent implements OnInit {
         this.lists = lists;
         
         this.load2 = 1;
+      },
+      error => {
+        this.load2 = 1;
+        console.log(error);    
       })
      this.users  = localStorage.getItem('user');
      this.users = JSON.parse(this.users);
@@ -74,6 +78,10 @@ export class TaskViewComponent implements OnInit {
       this.listsById = listsId;
 
       this.load = 1;
+    },
+    error => {
+      this.load = 1;
+      console.log(error);    
     })
     document.getElementById("mySidenav")!.style.width = "0";
     document.getElementById("main")!.style.marginLeft= "0";
@@ -97,6 +105,10 @@ export class TaskViewComponent implements OnInit {
         this.loadBtn = 1;
       });
       console.log(res);
+    },
+    error => {
+      this.loadBtn = 1;
+      console.log(error);    
     })
   }
 

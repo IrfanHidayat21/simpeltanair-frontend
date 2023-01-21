@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class SignupPageComponent implements OnInit {
   loadBtn: any = 1;
-
+  errorMsg:any;
   constructor(
     private authService: AuthService,
     private router: Router
@@ -28,6 +28,11 @@ export class SignupPageComponent implements OnInit {
         this.router.navigate(['/lists']);
         this.loadBtn = 1;
       }
+    },
+    error => {
+      this.loadBtn = 1;
+      this.errorMsg = "Harap mengisi semua data!";
+      console.log(error);    
     })
   }
 
