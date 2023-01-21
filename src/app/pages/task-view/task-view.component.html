@@ -21,7 +21,10 @@
                 
                 <button class="button is-primary has-text-white" routerLink="/new-list">+ Tambah</button>
                 <button class="button is-success has-text-white mt-2" (click)="profile()"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
-                <button class="button is-danger has-text-white mt-2" (click)="logout()">Log Out</button>
+                <button  [disabled]="loadBtnLog === 0" class="button is-danger has-text-white mt-2" (click)="logout()">
+                  <div *ngIf="loadBtnLog === 1">Log Out</div> 
+                  <i class="fa fa-spinner fa-spin" *ngIf="loadBtnLog === 0"></i>
+                </button>
                 <div>
                   <p class="has-text-primary has-text-centered mt-2">Web version {{webVersion}}</p>
                 </div>
@@ -82,7 +85,7 @@
                         </div>
                       </div>
                       <div class="lds-ripple" *ngIf="load === 0"><div></div><div></div></div>
-                    <h3 class="empty-text-state" *ngIf="tasks.length === 0">Belum ada kegiatan yang dimasukkan! Silahkan tekan tombol tambah!</h3>
+                    <h3 class="empty-text-state" *ngIf="tasks.length === 0 && load === 1">Belum ada kegiatan yang dimasukkan! Silahkan tekan tombol tambah!</h3>
                 </div>
 
                 <button class="circle-add-button button is-primary"  routerLink="./new-task">
@@ -143,7 +146,10 @@
       <button class="button is-success has-text-white mb-2 is-fullwidth" (click)="profile()"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
     </div>
     <div>
-      <button class="button is-danger has-text-white is-fullwidth" (click)="logout()">Log Out</button>
+      <button class="button is-danger has-text-white is-fullwidth" [disabled]="loadBtnLog === 0" (click)="logout()">
+        <div *ngIf="loadBtnLog === 1">Log Out</div> 
+         <i class="fa fa-spinner fa-spin" *ngIf="loadBtnLog === 0"></i>
+      </button>
     </div>
     <div>
       <p class="has-text-primary has-text-centered mt-2">Web version {{webVersion}}</p>

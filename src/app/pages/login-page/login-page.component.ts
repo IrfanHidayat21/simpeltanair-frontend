@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   loadBtn: any = 1;
-
+  errorMsg:any;
+  
   constructor(
     private authService: AuthService,
     private router: Router
@@ -21,6 +22,7 @@ export class LoginPageComponent implements OnInit {
 
   onLoginButtonClicked(email: string, password: string) {
     this.loadBtn = 0;
+    this.errorMsg = null;
     console.log(email,password);
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
@@ -28,6 +30,12 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['/lists']);
         this.loadBtn = 1;
       }
+    },
+    error => {
+      this.loadBtn = 1;
+      this.errorMsg = "Email / Password Anda salah!"
+      console.log(error);
+      
     })
   }
 

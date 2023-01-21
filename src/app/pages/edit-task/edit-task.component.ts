@@ -46,6 +46,10 @@ export class EditTaskComponent implements OnInit {
     this.taskService.updateTask(this.listId, this.taskId, title, tanggal, waktuMulai, waktuSelesai).subscribe(() => {
       this.router.navigate(['/lists', this.listId]);
       this.loadBtn = 1;
+    },
+    error => {
+      this.loadBtn = 1;
+      console.log(error);    
     })
   }
 

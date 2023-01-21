@@ -3,13 +3,16 @@
         <h1 class="title">
             Ubah Time Sheet Kapal
         </h1>
-                <input #listTitleInput type="text" [value]="valTitle" class="input has-background-light is-medium" placeholder="Nama Kapal / BG...">
+                <input #listTitleInput type="text" [value]="valTitle" class="input has-background-light is-medium mb-2" placeholder="Nama Kapal / BG...">
                 <input #namaKapalInput type="text" [value]="valNama" class="input has-background-light is-medium mb-2" placeholder="Nama Kapal Bongkar...">
                 <input #jumlahMuatanInput type="number" [value]="valJumlahMuatan" class="input has-background-light is-medium mb-2" placeholder="Jumlah Muatan...">
                 <br> <br/>
                 <div class="buttons is-right">
                     <button class="button is-medium" routerLink="/">Batal</button>
-                    <button class="button is-primary hast-text-white is-medium" (click)="updateKapal(listTitleInput.value, namaKapalInput.value, jumlahMuatanInput.valueAsNumber)">Simpan</button>
+                    <button [disabled]="loadBtn === 0" class="button is-primary hast-text-white is-medium" (click)="updateKapal(listTitleInput.value, namaKapalInput.value, jumlahMuatanInput.valueAsNumber)">
+                        <div *ngIf="loadBtn === 1">Simpan</div> 
+                        <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
+                    </button>
                 </div>
     </div>
     <div class="lds-ripple2" *ngIf="loadData === 0"><div></div><div></div></div>

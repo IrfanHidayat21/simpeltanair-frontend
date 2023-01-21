@@ -8,7 +8,7 @@ import { TaskService } from 'src/app/task.service';
   styleUrls: ['./new-task.component.scss']
 })
 export class NewTaskComponent implements OnInit {
-
+  loadBtn:any=1;
   listId !: string;
   constructor(
     private taskService:TaskService,
@@ -25,9 +25,15 @@ export class NewTaskComponent implements OnInit {
   }
 
   createTask(title:string, tanggal:string, waktuMulai: string, waktuSelesai: string) {
+    this.loadBtn = 0;
     this.taskService.createTask(title,tanggal,waktuMulai,waktuSelesai, this.listId).subscribe((newTask: any) => {
       console.log(newTask);
       this.router.navigate(['../'], {relativeTo: this.route});
+      this.loadBtn = 1;
+    },
+    error => {
+      this.loadBtn = 1;
+      console.log(error);    
     })
   }
 }

@@ -11,7 +11,10 @@
                 <br>
                 <div class="buttons is-right">
                     <button class="button is-medium" routerLink="/">Cancel</button>
-                    <button class="button is-primary hast-text-white is-medium" (click)="createTask(taskTitleInput.value, taskTanggalInput.value, taskWaktuMulaiInput.value, taskWaktuSelesaiInput.value)">Create</button>
+                    <button [disabled]="loadBtn === 0" class="button is-primary hast-text-white is-medium" (click)="createTask(taskTitleInput.value, taskTanggalInput.value, taskWaktuMulaiInput.value, taskWaktuSelesaiInput.value)">
+                        <div *ngIf="loadBtn === 1">Simpan</div> 
+                        <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
+                    </button>
                 </div>
     </div>
 </div>

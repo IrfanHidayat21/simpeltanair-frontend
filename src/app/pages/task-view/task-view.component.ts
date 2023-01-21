@@ -28,7 +28,7 @@ export class TaskViewComponent implements OnInit {
   loadProfile: any= 1;
 
   showProfile: any=0;
-
+  loadBtnLog: any = 1;
   constructor(
     private taskService : TaskService,
     private route: ActivatedRoute ,
@@ -109,7 +109,12 @@ export class TaskViewComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.loadBtnLog = 0;
+    setTimeout(() => {  
+      this.authService.logout();
+      this.loadBtnLog = 1;
+    }, 1000);
+
   }
 
   downloadReport() {

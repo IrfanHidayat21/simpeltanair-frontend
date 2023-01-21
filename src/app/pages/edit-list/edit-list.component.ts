@@ -17,7 +17,7 @@ export class EditListComponent implements OnInit {
   valJumlahMuatan!: number;
 
   loadData: any = 1;
-  
+  loadBtn:any=1;
   ngOnInit() {
     this.loadData = 0;
     this.route.params.subscribe(
@@ -37,8 +37,14 @@ export class EditListComponent implements OnInit {
   }
 
   updateKapal(title:string, nama:string, jumlah:number) {
+    this.loadBtn = 0;
     this.taskService.updateKapal(this.listId, title, nama, jumlah).subscribe(() => {
       this.router.navigate(['/lists', this.listId]);
+      this.loadBtn = 1;
+    },
+    error => {
+      this.loadBtn = 1;
+      console.log(error);    
     })
   }
 
