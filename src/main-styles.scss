@@ -185,5 +185,16 @@ html, body {
     html, body {
         height: 100% !important;
     }
+
+    .title-apps { 
+        position: absolute;
+        top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        text-align: center;
+        font-size: medium;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
     
 }
