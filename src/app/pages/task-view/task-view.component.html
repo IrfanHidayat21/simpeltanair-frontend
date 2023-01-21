@@ -132,13 +132,15 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
   <a class="title-sidemenu has-text-primary">DAFTAR KAPAL</a>
+
+  <div class="lds-facebook" *ngIf="load2 === 0"><div></div><div></div></div>
   <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" (click)="removePush(list._id)" routerLinkActive="is-active">{{list.title}}</a>
   <div class="sidemenu-footer">
     <div>
       <button class="button w is-primary has-text-white mb-2 is-fullwidth" routerLink="/new-list">+ Tambah</button>
     </div>
     <div>
-      <button class="button is-success has-text-white mb-2 is-fullwidth" routerLink="/new-list"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
+      <button class="button is-success has-text-white mb-2 is-fullwidth" (click)="profile()"> <i class="fas fa-user mr-2" aria-hidden="true"></i> {{users.nahkoda}}</button>
     </div>
     <div>
       <button class="button is-danger has-text-white is-fullwidth" (click)="logout()">Log Out</button>

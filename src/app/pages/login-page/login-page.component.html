@@ -21,8 +21,9 @@
           </div>
           <div class="field" style="display: flex; justify-content: flex-end;">
             <p class="control">
-              <button class="button is-success has-text-white" (click)="onLoginButtonClicked(emailInput.value, pwInput.value)">
-                Login
+              <button [disabled]="loadBtn === 0" class="button is-success has-text-white" (click)="onLoginButtonClicked(emailInput.value, pwInput.value)">
+                <div *ngIf="loadBtn === 1">Login</div> 
+                <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
               </button>
             </p>
           </div>

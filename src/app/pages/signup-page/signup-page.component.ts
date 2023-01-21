@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./signup-page.component.scss']
 })
 export class SignupPageComponent implements OnInit {
+  loadBtn: any = 1;
 
   constructor(
     private authService: AuthService,
@@ -19,11 +20,13 @@ export class SignupPageComponent implements OnInit {
   }
 
   onSignupButtonClicked(email: string, nahkoda:string, jumlahKru: number, kru:string, password: string) {
+    this.loadBtn = 0;
     console.log(email, nahkoda, jumlahKru, kru, password);
     this.authService.signup(email, nahkoda, jumlahKru, kru, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
         this.router.navigate(['/lists']);
+        this.loadBtn = 1;
       }
     })
   }

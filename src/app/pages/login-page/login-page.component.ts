@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  loadBtn: any = 1;
 
   constructor(
     private authService: AuthService,
@@ -19,11 +20,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   onLoginButtonClicked(email: string, password: string) {
+    this.loadBtn = 0;
     console.log(email,password);
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
         this.router.navigate(['/lists']);
+        this.loadBtn = 1;
       }
     })
   }

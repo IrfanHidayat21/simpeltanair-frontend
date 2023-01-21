@@ -48,8 +48,9 @@
           
           <div class="field" style="display: flex; justify-content: flex-end;">
             <p class="control">
-              <button class="button is-success has-text-white" (click)="onSignupButtonClicked(emailInput.value, nahkodaInput.value, jumlahKruInput.valueAsNumber, kruInput.value, pwInput.value)">
-                Daftar
+              <button [disabled]="loadBtn === 0" class="button is-success has-text-white" (click)="onSignupButtonClicked(emailInput.value, nahkodaInput.value, jumlahKruInput.valueAsNumber, kruInput.value, pwInput.value)">
+                <div *ngIf="loadBtn === 1">Daftar</div> 
+                <i class="fa fa-spinner fa-spin" *ngIf="loadBtn === 0"></i>
               </button>
             </p>
           </div>
